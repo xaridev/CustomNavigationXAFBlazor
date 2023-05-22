@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <NavigationItems NavigationStyle="Accordion">
+    <Items>
+      <Item Id="Default">
+        <Items>
+          <Item Id="WizardNav" Caption="Wizard" ViewId="WizardDash" IsNewNode="True" />
+        </Items>
+      </Item>
+    </Items>
+  </NavigationItems>
+  <SchemaModules>
+    <SchemaModule Name="SystemModule" Version="22.2.6.0" IsNewNode="True" />
+  </SchemaModules>
+  <Views DefaultListEditor="DevExpress.ExpressApp.Blazor.Editors.DxGridListEditor">
+    <DashboardView Id="WizardDash" IsNewNode="True">
+      <HiddenActions IsNewNode="True">
+        <ActionLink ActionId="OrganizeDashboard" IsNewNode="True" />
+        <ActionLink ActionId="Refresh" IsNewNode="True" />
+      </HiddenActions>
+      <Items IsNewNode="True">
+        <ControlDetailItem Id="WizardComponent" ControlTypeName="CustomNavigationXAFBlazor.Blazor.Server.Editors.Wizard.WizardComponentAdapter" IsNewNode="True" />
+      </Items>
+    </DashboardView>
+  </Views>
+</Application>

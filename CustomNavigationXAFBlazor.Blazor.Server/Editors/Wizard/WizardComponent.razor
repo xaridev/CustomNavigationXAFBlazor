@@ -1,0 +1,143 @@
+﻿<style>
+    .main-toolbar {
+        display: none;
+    }
+</style>
+
+<div>
+    <div class="row">
+        <div class="col-3">
+            <h3>Calculate Attendance</h3>
+            <Steps ShowProgressDot Current="current" Direction="vertical" Size="small">
+                @foreach (var item in Steps)
+                {
+                    <Step Title="@item.Title" />
+                }
+            </Steps>
+        </div>
+        <div class="col-9">
+            <div class="steps-content">
+                @Steps[current].Content
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="steps-action">
+            @if (current > 0)
+            {
+                <Button Type="primary" OnClick="OnPreClick">Previous</Button>
+            }
+            @if (current < Steps.Count() - 1)
+            {
+                <Button Type="primary" OnClick="OnNextClick">Next</Button>
+            }
+            @if (current == Steps.Count() - 1)
+            {
+                <Button Type="primary" OnClick=@(() => message.Success("Processing complete!"))>
+                    Done
+                </Button>
+            }
+
+        </div>
+    </div>
+</div>
+
+<style>
+    .steps-content {
+        margin-top: 16px;
+        border: 1px dashed #e9e9e9;
+        border-radius: 6px;
+        background-color: #fafafa;
+        min-height: 200px;
+        text-align: center;
+        padding-top: 80px;
+    }
+
+    .steps-action {
+        margin-top: 24px;
+    }
+</style>
+
+@inject IMessageService message
+@code {
+    //[Parameter]
+    public List<StepItem> Steps = new List<StepItem>
+    {
+        new StepItem
+        {
+            Title = "Step 1",
+            Content = builder =>
+            {
+                builder.OpenComponent<DateRangeComponent>(0);
+                builder.CloseComponent();
+            }
+        },
+        new StepItem
+        {
+            Title = "Step 2",
+            Content = builder =>
+            {
+                builder.OpenComponent<Input<string>>(0);
+                builder.AddAttribute(1, "Placeholder", "Enter name.");
+                builder.CloseComponent();
+            }
+        },
+        new StepItem
+        {
+            Title = "Step 3",
+            Content = builder =>
+            {
+                builder.OpenComponent<DateRangeComponent>(0);
+                builder.CloseComponent();
+            }
+        },
+        new StepItem
+        {
+            Title = "Step 4",
+            Content = builder =>
+            {
+                builder.OpenComponent<DateRangeComponent>(0);
+                builder.CloseComponent();
+            }
+        },
+        new StepItem
+        {
+            Title = "Step 5",
+            Content = builder =>
+            {
+                builder.OpenComponent<DateRangeComponent>(0);
+                builder.CloseComponent();
+            }
+        },
+        new StepItem
+        {
+            Title = "Step 6",
+            Content = builder =>
+            {
+                builder.OpenComponent<DateRangeComponent>(0);
+                builder.CloseComponent();
+            }
+        }
+    };
+
+
+    public int current { get; set; } = 0;
+
+    //public StepItem[] steps =
+    //{
+    //    new StepItem {Title = "First", Content = "First-content"},
+    //    new StepItem {Title = "Second", Content = "Second-content"},
+    //    new StepItem {Title = "Third", Content = "Third-content"},
+    //    new StepItem {Title = "Last", Content = "Last-content"}
+    //};
+
+    void OnPreClick()
+    {
+        current--;
+    }
+
+    void OnNextClick()
+    {
+        current++;
+    }
+}
